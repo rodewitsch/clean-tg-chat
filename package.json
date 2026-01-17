@@ -1,6 +1,6 @@
 {
   "name": "clean-tg-chat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Removes useless information from JSON file with exported Telegram chat",
   "main": "index.js",
   "bin": {
