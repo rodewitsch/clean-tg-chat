@@ -1,0 +1,29 @@
+{
+  "name": "clean-tg-chat",
+  "version": "1.0.0",
+  "description": "Removes useless information from JSON file with exported Telegram chat",
+  "main": "index.js",
+  "bin": {
+    "clean-tg-chat": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodewitsch/clean-tg-chat.git"
+  },
+  "keywords": [
+    "Telegram",
+    "cli",
+    "shorten",
+    "export",
+    "analyze"
+  ],
+  "author": "RDM",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodewitsch/clean-tg-chat/issues"
+  },
+  "homepage": "https://github.com/rodewitsch/clean-tg-chat#readme"
+}
