@@ -1,4 +1,3 @@
-// clean_chat.js
 const fs = require('fs');
 
 function cleanMessage(message) {
@@ -9,12 +8,10 @@ function cleanMessage(message) {
     text: ''
   };
 
-  // reply_to_message_id для структуры диалога
   if (message.reply_to_message_id) {
     cleaned.reply_to_message_id = message.reply_to_message_id;
   }
 
-  // Извлекаем текст
   if (typeof message.text === 'string') {
     cleaned.text = message.text;
   } else if (Array.isArray(message.text)) {
@@ -30,7 +27,6 @@ function cleanMessage(message) {
     cleaned.text = textParts.join('\n');
   }
 
-  // Сохраняем реакции с информацией о том, кто поставил
   if (message.reactions && Array.isArray(message.reactions)) {
     cleaned.reactions = message.reactions
       .filter(r => r.type === 'emoji')
@@ -43,7 +39,6 @@ function cleanMessage(message) {
         })) || []
       }));
     
-    // Если нет пользователей в recent, но есть общее количество
     cleaned.reactions.forEach(reaction => {
       if (reaction.users.length === 0 && reaction.count) {
         reaction.count = reaction.count;
@@ -58,8 +53,8 @@ function processChat() {
   const args = process.argv.slice(2);
   
   if (args.length < 1) {
-    console.log('Использование: node clean_chat.js <input.json> [output.json]');
-    console.log('Пример: node clean_chat.js result.json clean.json');
+    console.log('Usage: node clean_chat.js <input.json> [output.json]');
+    console.log('Example: node clean_chat.js result.json clean.json');
     process.exit(1);
   }
 
@@ -68,7 +63,7 @@ function processChat() {
 
   try {
     if (!fs.existsSync(inputFile)) {
-      console.error(`Файл ${inputFile} не найден`);
+      console.error(`File ${inputFile} not found`);
       process.exit(1);
     }
 
@@ -89,11 +84,10 @@ function processChat() {
     
     fs.writeFileSync(outputFile, JSON.stringify(cleanedData, null, 2), 'utf8');
     
-    console.log('✅ Готово!');
-    console.log(`📁 Сохранено в: ${outputFile}`);
-    console.log(`💬 Сообщений: ${cleanedData.messages.length}`);
+    console.log('✅ Done!');
+    console.log(`📁 Saved to: ${outputFile}`);
+    console.log(`💬 Messages: ${cleanedData.messages.length}`);
     
-    // Статистика
     const users = {};
     let replies = 0;
     let reactionsCount = 0;
@@ -112,14 +106,13 @@ function processChat() {
       }
     });
     
-    console.log(`👥 Участников: ${Object.keys(users).length}`);
-    console.log(`↪️  Ответов: ${replies}`);
-    console.log(`😀 Реакций: ${reactionsCount} (${reactionsWithUsers} с информацией о пользователях)`);
+    console.log(`👥 Participants: ${Object.keys(users).length}`);
+    console.log(`↪️  Replies: ${replies}`);
+    console.log(`😀 Reactions: ${reactionsCount} (${reactionsWithUsers} with user info)`);
     
-    // Пример реакций
     const messagesWithReactions = cleanedData.messages.filter(msg => msg.reactions && msg.reactions.length > 0);
     if (messagesWithReactions.length > 0) {
-      console.log('\nПример реакций:');
+      console.log('\nExample reactions:');
       const sample = messagesWithReactions[0];
       sample.reactions.forEach((reaction, i) => {
         console.log(`  ${reaction.emoji}: ${reaction.users.map(u => u.name).join(', ')}`);
@@ -127,7 +120,7 @@ function processChat() {
     }
     
   } catch (error) {
-    console.error('❌ Ошибка:', error.message);
+    console.error('❌ Error:', error.message);
     process.exit(1);
   }
 }
