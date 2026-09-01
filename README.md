@@ -138,6 +138,15 @@ Found a bug or have suggestions?
 
 ---
 
+<p align="center">
+I’ll be glad to have your support. Every donation goes towards developing the project and maintaining the infrastructure 💙
+</p>
+<p align="center">
+  <a href="https://boosty.to/rodevich/donate">
+    <img src="https://github.com/user-attachments/assets/a15bd2c0-ed6b-4140-9480-dfb70a0b5f1a" alt="Donate">
+  </a>
+</p>
+
 <div align="center">
 Made with ❤️ for Telegram power users
 </div>
